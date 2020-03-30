@@ -63,7 +63,7 @@ class Jobs(Requester):
         jobs = self.get_jobs()
         return iter(jobs)
 
-    def get_jobs(self, prefix=None):
+    def get_jobs(self, prefix=None, region=None):
         """ Lists all the jobs registered with Nomad.
 
            https://www.nomadproject.io/docs/http/jobs.html
@@ -75,7 +75,7 @@ class Jobs(Requester):
               - nomad.api.exceptions.BaseNomadException
               - nomad.api.exceptions.URLNotFoundNomadException
         """
-        params = {"prefix": prefix}
+        params = {"prefix": prefix, "region": region}
         return self.request(method="get", params=params).json()
 
     def register_job(self, job):
